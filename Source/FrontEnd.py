@@ -35,7 +35,7 @@ def select_int_value(list_1):
 # 1 - 2: Brand & Type
 opt1 = np.sort(select_items_capitalized('Brand'))
 select1 = st.sidebar.selectbox("Lựa chọn hãng máy", options=opt1, )
-resulf['Brand'] = select1
+resulf['Brand'] = select1.lower()
 
 with st.sidebar:
     if select1:
