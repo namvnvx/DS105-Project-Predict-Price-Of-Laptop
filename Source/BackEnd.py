@@ -11,7 +11,7 @@ def Encoder(data, col = "Chưa Nhập"):
         try:
             return encoder.transform([data])[0]
         except:
-            return 0.
+            return 0
     
 def ProcessInput(data):
     # Chỉnh sửa đầu vào để đem đi predict
@@ -19,7 +19,7 @@ def ProcessInput(data):
     cate_list = ['Brand', 'Brand_CPU', 'Hard_Drive', 'Key_light', 'MaxSup_Ram',
                  'Screen_Size', 'Type_CPU', 'Type']
     for col in cate_list:
-        data[col] = Encoder(data.loc[col], col)
+        data[col] = Encoder(data[col], col)
 
     data = np.array(data.values).astype('float64').reshape(1, 22)
 
@@ -45,6 +45,7 @@ def Predict(data):
 #================ Main ================#
 
 def Main(data):
+    print('trung', data)
     data = ProcessInput(data)
 
     return Predict(data)
