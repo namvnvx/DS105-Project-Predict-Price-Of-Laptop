@@ -35,9 +35,9 @@ def Main():
     ### Sidebar - Tiêu chí lựa chọn
 
 # 1 - 2: Brand & Type
-opt1 = np.sort(select_items_capitalized('Brand'))
-select1 = st.sidebar.selectbox("Lựa chọn hãng máy", options=opt1, )
-resulf['Brand'] = select1
+    opt1 = np.sort(select_items_capitalized('Brand'))
+    select1 = st.sidebar.selectbox("Lựa chọn hãng máy", options=opt1, )
+    resulf['Brand'] = select1.lower()
 
     with st.sidebar:
         if select1:
@@ -110,16 +110,16 @@ resulf['Brand'] = select1
     resulf['Cache'] = select15
 
     # 16: BusSpeed_RAM
-    opt16 = np.sort(select_int_value(select_items('Cache')))
+    opt16 = np.sort(select_int_value(select_items('BusSpeed_RAM')))
     select16 = st.sidebar.selectbox("Tốc độ (tần số hoạt động) của RAM (**MHz**)", options=opt16)
-    resulf['Cache'] = select16
+    resulf['BusSpeed_RAM'] = select16
 
     # 17: MaxSup_RAM
     opt17 = np.sort(select_int_value(select_items('MaxSup_RAM')))
     #opt17_1 = opt17
     #opt17_1[0] = "Không hỗ trợ"
     select17 = st.sidebar.selectbox("Hỗ trợ RAM tối đa (**GB**)", options=opt17)
-    resulf['MaxSup_RAM'] = select17
+    resulf['MaxSup_Ram'] = select17
     #if select17 == 'Không hỗ trợ':
     #    resulf['MaxSpeed_CPU'] = 0
     #else:
