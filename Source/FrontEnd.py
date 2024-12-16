@@ -1,8 +1,13 @@
 import streamlit as st
 
+def ShowTitle(data):
+    # Hàm hiện thị tiêu đề
+    st.title(data)
 
+# Hàm hiển thị logo
 
+# Hiện tên nhóm và thành viên, GVHD(nếu có)
 
-######################## Main ##########################
-def Main():
-    st.title('Dự Đoán Giá Laptop 2')
+# Hiện khung nhập dữ liệu 
+
+# Hiện thị lên màn hình
