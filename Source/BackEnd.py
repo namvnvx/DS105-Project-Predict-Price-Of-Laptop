@@ -45,7 +45,6 @@ def Predict(data):
 #================ Main ================#
 
 def Main(data):
-    print('trung', data)
     data = ProcessInput(data)
 
     return Predict(data)
