@@ -1,7 +1,50 @@
-from keras.models import load_model
+import joblib
+import numpy as np
 
-# Hàm loadmodel
+def Encoder(data, col = "Chưa Nhập"):
+    # Chuyển đổi cột feature
 
-# Hàm dự đoán
+    if col != "Chưa Nhập":
+        link = ".\\Source\\Model_Encoder\\" + col + '.joblib'
+        encoder = joblib.load(link )
 
-# Hàm xử lý kết quả
+        try:
+            return encoder.transform([data])[0]
+        except:
+            return 0.
+    
+def ProcessInput(data):
+    # Chỉnh sửa đầu vào để đem đi predict
+    
+    cate_list = ['Brand', 'Brand_CPU', 'Hard_Drive', 'Key_light', 'MaxSup_Ram',
+                 'Screen_Size', 'Type_CPU', 'Type']
+    for col in cate_list:
+        data[col] = Encoder(data.loc[col], col)
+
+    data = np.array(data.values).astype('float64').reshape(1, 22)
+
+    return data
+
+def ProcessResult(data):
+    # Trả về giá trị được làm đẹp
+
+    temp = round(data / 100000, 1)
+
+    return temp
+
+def Predict(data):
+    # Dự đoán 
+
+    link = ".\\Source\\Model.joblib"
+    model = joblib.load(link)
+    result = model.predict(ProcessInput(data))
+
+    return ProcessResult(result)
+
+
+#================ Main ================#
+
+def Main(data):
+    data = ProcessInput(data)
+
+    return Predict(data)
