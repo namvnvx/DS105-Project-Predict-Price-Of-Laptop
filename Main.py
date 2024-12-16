@@ -4,7 +4,7 @@ import streamlit as st
 
 def Main():
     Input = FrontEnd.Main()
-    print('Input', Input)
+
     result = BackEnd.Main(Input)
     st.header('result : ', result)
     return 0
