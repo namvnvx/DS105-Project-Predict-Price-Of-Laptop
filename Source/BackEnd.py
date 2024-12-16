@@ -6,7 +6,7 @@ def Encoder(data, col = "Chưa Nhập"):
 
     if col != "Chưa Nhập":
         link = ".\\Source\\Model_Encoder\\" + col + '.joblib'
-        encoder = joblib.load(link )
+        encoder = joblib.load(link)
 
         try:
             return encoder.transform([data])[0]
@@ -15,7 +15,7 @@ def Encoder(data, col = "Chưa Nhập"):
     
 def ProcessInput(data):
     # Chỉnh sửa đầu vào để đem đi predict
-    
+
     cate_list = ['Brand', 'Brand_CPU', 'Hard_Drive', 'Key_light', 'MaxSup_Ram',
                  'Screen_Size', 'Type_CPU', 'Type']
     for col in cate_list:
@@ -28,7 +28,7 @@ def ProcessInput(data):
 def ProcessResult(data):
     # Trả về giá trị được làm đẹp
 
-    temp = round(data / 100000, 1)
+    temp = data[0] / 1000000.
 
     return temp
 
@@ -37,7 +37,7 @@ def Predict(data):
 
     link = ".\\Source\\Model.joblib"
     model = joblib.load(link)
-    result = model.predict(ProcessInput(data))
+    result = model.predict(data)
 
     return ProcessResult(result)
 

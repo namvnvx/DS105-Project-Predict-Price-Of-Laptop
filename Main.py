@@ -6,7 +6,7 @@ def Main():
     Input = FrontEnd.Main()
 
     result = BackEnd.Main(Input)
-    st.header('result : ', result)
+    st.header('result : ' + str(result))
     return 0
 
 if __name__ == "__main__":
