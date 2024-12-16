@@ -34,10 +34,10 @@ def Main():
 
     ### Sidebar - Tiêu chí lựa chọn
 
-    # 1 - 2: Brand & Type
-    opt1 = np.sort(select_items_capitalized('Brand'))
-    select1 = st.sidebar.selectbox("Lựa chọn hãng máy", options=opt1, )
-    resulf['Brand'] = select1
+# 1 - 2: Brand & Type
+opt1 = np.sort(select_items_capitalized('Brand'))
+select1 = st.sidebar.selectbox("Lựa chọn hãng máy", options=opt1, )
+resulf['Brand'] = select1
 
     with st.sidebar:
         if select1:
