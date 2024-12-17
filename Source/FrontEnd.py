@@ -30,6 +30,9 @@ def Run():
         
 #========================================= Danh sách lựa chọn ==================================================#
 
+    # title
+    st.sidebar.title("Danh sách tiêu chí lựa chọn")
+
     # 1 - 2: Brand & Type
     opt1 = np.sort(select_items_capitalized('Brand'))
     select1 = st.sidebar.selectbox("Lựa chọn hãng máy", options=opt1, )
@@ -96,7 +99,7 @@ def Run():
     resulf['MaxSpeed_CPU'] = select13
 
     # 14: Key_Light
-    opt14 = np.sort(select_items('Key_Light'))
+    opt14 = select_items('Key_Light')
     select14 = st.sidebar.selectbox("Đèn bàn phím", options=opt14)
     resulf['Key_light'] = select14
 
@@ -122,9 +125,9 @@ def Run():
     select17 = st.sidebar.selectbox("Hỗ trợ RAM tối đa (**GB**)", options=opt17_1)
 
     if select17 == 'Không hỗ trợ':
-        resulf['MaxSup_RAM'] = 0
+        resulf['MaxSup_Ram'] = 0
     else:
-        resulf['MaxSup_RAM'] = int(select17)
+        resulf['MaxSup_Ram'] = int(select17)
     
 
     # 18: Screen_Size
