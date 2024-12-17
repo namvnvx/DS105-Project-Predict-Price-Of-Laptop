@@ -90,12 +90,12 @@ def Run():
 
     # 12: Speed_CPU
     opt12 = np.sort(select_items('Speed_CPU'))
-    select12 = st.sidebar.select_slider("Tốc độ xử lý của CPU (**GHz**)", options=opt12)
+    select12 = st.sidebar.slider("Tốc độ xử lý của CPU (**GHz**)", opt12[0], opt12[-1])
     resulf['Speed_CPU'] = select12
 
     # 13: MaxSpeed_CPU
     opt13 = np.sort(select_items('MaxSpeed_CPU'))
-    select13 = st.sidebar.select_slider("Tốc độ xử lý TỐI ĐA của CPU", options=opt13)
+    select13 = st.sidebar.slider("Tốc độ xử lý TỐI ĐA của CPU", opt13[0], opt13[-1])
     resulf['MaxSpeed_CPU'] = select13
 
     # 14: Key_Light
