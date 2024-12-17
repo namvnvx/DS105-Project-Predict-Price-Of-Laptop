@@ -4,9 +4,7 @@ import numpy as np
 
 
 def Run():
-    #==============================================================================================#
-
-    ### hàm và truy vấn
+#========================================= Hàm & Truy vấn ==================================================#
 
     df = pd.read_csv('Source/Df_SuperUltra_Provjp.csv')
 
@@ -30,10 +28,7 @@ def Run():
         # lấy giá trị sô nguyên
         return [int(item) for item in list_1]
         
-    #==============================================================================================#
-
-    ### Sidebar - Tiêu chí lựa chọn
-
+#========================================= Danh sách lựa chọn ==================================================#
 
     # 1 - 2: Brand & Type
     opt1 = np.sort(select_items_capitalized('Brand'))
@@ -48,7 +43,7 @@ def Run():
 
     # 3: RAM
     opt3 = np.sort(select_int_value(select_items('RAM')))
-    select3 = st.sidebar.selectbox("Lựa chọn RAM (GB)", options=opt3, index=1)
+    select3 = st.sidebar.selectbox("Lựa chọn RAM (**GB**)", options=opt3, index=1)
     resulf['RAM'] = select3
 
     # 4 - 5: Brand_CPU & Type_CPU
@@ -64,20 +59,20 @@ def Run():
 
     # 6: Hard_Drive
     opt6 = np.sort(select_int_value(select_items('Hard_Drive')))
-    select6 = st.sidebar.selectbox("lựa chọn dung lượng ổ cứng (GB)", options=opt6)
+    select6 = st.sidebar.selectbox("lựa chọn dung lượng ổ cứng (**GB**)", options=opt6)
     resulf['Hard_Drive'] = select6
 
     # 7 - 8 - 9: Length, Width & Thick
     opt7 = np.sort(select_items('Length'))
-    select7 = st.sidebar.selectbox("Độ dài (mm)", options=opt7)
+    select7 = st.sidebar.selectbox("Độ dài (**mm**)", options=opt7)
     resulf['Length'] = select7
 
     opt8 = np.sort(select_items('Width'))
-    select8 = st.sidebar.selectbox("Độ rộng (mm)", options=opt8)
+    select8 = st.sidebar.selectbox("Độ rộng (**mm**)", options=opt8)
     resulf['Width'] = select8
 
     opt9 = np.sort(select_items('Thick'))
-    select9 = st.sidebar.selectbox("Độ dày (mm)", options=opt9)
+    select9 = st.sidebar.selectbox("Độ dày (**mm**)", options=opt9)
     resulf['Thick'] = select9
 
     # 10: Cores_CPU
@@ -97,7 +92,7 @@ def Run():
 
     # 13: MaxSpeed_CPU
     opt13 = np.sort(select_items('MaxSpeed_CPU'))
-    select13 = st.sidebar.selectbox("Tốc độ xử lý TỐI ĐA của CPU", options=opt13)
+    select13 = st.sidebar.selectbox("Tốc độ xử lý TỐI ĐA của CPU (**GHz**)", options=opt13)
     resulf['MaxSpeed_CPU'] = select13
 
     # 14: Key_Light
@@ -107,7 +102,7 @@ def Run():
 
     # 15: Cache
     opt15 = np.sort(select_int_value(select_items('Cache')))
-    select15 = st.sidebar.selectbox("Dung lượng bộ nhớ đệm (**Đơn vị chưa bt**)", options=opt15)
+    select15 = st.sidebar.selectbox("Dung lượng bộ nhớ đệm (**Byte**)", options=opt15)
     resulf['Cache'] = select15
 
     # 16: BusSpeed_RAM
@@ -116,15 +111,21 @@ def Run():
     resulf['BusSpeed_RAM'] = select16
 
     # 17: MaxSup_RAM
+    #opt17 = np.sort(select_int_value(select_items('MaxSup_RAM')))
+    #select17 = st.sidebar.selectbox("Hỗ trợ RAM tối đa (**GB**)", options=opt17)
+    #resulf['MaxSup_Ram'] = select17
     opt17 = np.sort(select_int_value(select_items('MaxSup_RAM')))
-    #opt17_1 = opt17
-    #opt17_1[0] = "Không hỗ trợ"
-    select17 = st.sidebar.selectbox("Hỗ trợ RAM tối đa (**GB**)", options=opt17)
-    resulf['MaxSup_Ram'] = select17
-    #if select17 == 'Không hỗ trợ':
-    #    resulf['MaxSpeed_CPU'] = 0
-    #else:
-    #    resulf['MaxSup_RAM'] = select17
+
+    opt17_1 = [str(item) for item in opt17]
+    opt17_1[0] = "Không hỗ trợ"
+
+    select17 = st.sidebar.selectbox("Hỗ trợ RAM tối đa (**GB**)", options=opt17_1)
+
+    if select17 == 'Không hỗ trợ':
+        resulf['MaxSup_RAM'] = 0
+    else:
+        resulf['MaxSup_RAM'] = int(select17)
+    
 
     # 18: Screen_Size
     opt18 = np.sort((select_items('Screen_Size')))
@@ -151,7 +152,7 @@ def Run():
     select22 = st.sidebar.selectbox("Thời điểm ra mắt sản phẩm (**Năm 20__**)", options=opt22)
     resulf['Release'] = select22
 
-    #==============================================================================================#
+#========================================== Phần web chính ====================================================#
 
     # title và header
     st.title('Dự đoán giá Laptop',)
@@ -160,15 +161,27 @@ def Run():
 
     # body
     st.write("Nhằm đưa đến cho **Người tiêu dùng phổ thông** khả năng nhận biết tầm giá của 1 chiếc **Laptop** trên thị trường chung hiện nay.")
-    st.write("*Sản phẩm chỉ mang tính chất tham khảo, nên chắc chắn sẽ có sai sót.*")
+    st.write("*Sản phẩm chỉ mang tính chất tham khảo, không tránh khỏi sai sót.*")
+    
     st.subheader("Kết quả lựa chọn")
-    final_df = pd.DataFrame(resulf,index=[0])
-    st.write(final_df)
-    st.write(resulf)
-    st.subheader("Kết quả dự đoán")
+    
+    data = pd.Series(resulf)
+    p1 = data[:8].to_frame().rename(columns={0: "Giá trị đã chọn"}) 
+    p2 = data[8:15].to_frame().rename(columns={0: "Giá trị đã chọn"})
+    p3 = data[15:].to_frame().rename(columns={0: "Giá trị đã chọn"})
 
-    return pd.Series(resulf)
+    # Tạo 3 cột trong Streamlit
+    col1, col2, col3 = st.columns(3)
 
+    # Hiển thị từng phần trong mỗi cột
+    with col1:
+        st.dataframe(p1, width=220)
+    with col2:
+        st.dataframe(p2, width=220)
+    with col3:
+        st.dataframe(p3, width=220)
+
+    return data
 
 #================ Input ================#
 def Input():
@@ -182,6 +195,6 @@ def Input():
 def Output(result):
     # Hàm xuất kết quả
     print(result)
-    st.header('Result : ' + str(result))
+    st.header('Kết quả dự đoán : ' + str(result))
 
     return
