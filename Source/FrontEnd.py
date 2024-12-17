@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 
-def Main():
+def Run():
     #==============================================================================================#
 
     ### hàm và truy vấn
@@ -168,3 +168,20 @@ def Main():
     st.subheader("Kết quả dự đoán")
 
     return pd.Series(resulf)
+
+
+#================ Input ================#
+def Input():
+    # Hàm lấy dữ liệu
+
+    return Run()
+
+
+
+#================ Output ================#
+def Output(result):
+    # Hàm xuất kết quả
+    print(result)
+    st.header('Result : ' + str(result))
+
+    return
