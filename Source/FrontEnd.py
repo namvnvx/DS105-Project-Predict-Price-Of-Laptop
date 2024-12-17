@@ -101,7 +101,7 @@ def Run():
     # 14: Key_Light
     opt14 = select_items('Key_Light')
     select14 = st.sidebar.selectbox("Đèn bàn phím", options=opt14)
-    resulf['Key_Light'] = select14
+    resulf['Key_light'] = select14
 
     # 15: Cache
     opt15 = np.sort(select_int_value(select_items('Cache')))
