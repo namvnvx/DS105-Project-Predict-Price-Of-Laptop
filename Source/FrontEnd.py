@@ -30,12 +30,12 @@ def Run():
         
 #========================================= Danh sách lựa chọn ==================================================#
 
-    # title
+    # Sidebar title
     st.sidebar.title("Danh sách tiêu chí lựa chọn")
 
     # 1 - 2: Brand & Type
     opt1 = np.sort(select_items_capitalized('Brand'))
-    select1 = st.sidebar.selectbox("Lựa chọn hãng máy", options=opt1, )
+    select1 = st.sidebar.selectbox("1. Lựa chọn hãng máy", options=opt1, )
     resulf['Brand'] = select1.lower()
 
     with st.sidebar:
@@ -67,15 +67,15 @@ def Run():
 
     # 7 - 8 - 9: Length, Width & Thick
     opt7 = np.sort(select_items('Length'))
-    select7 = st.sidebar.selectbox("Độ dài (**mm**)", options=opt7)
+    select7 = st.sidebar.slider("Độ dài (**mm**)", opt7[0], opt7[-1])
     resulf['Length'] = select7
 
     opt8 = np.sort(select_items('Width'))
-    select8 = st.sidebar.selectbox("Độ rộng (**mm**)", options=opt8)
+    select8 = st.sidebar.slider("Độ rộng (**mm**)", opt8[0], opt8[-1])
     resulf['Width'] = select8
 
     opt9 = np.sort(select_items('Thick'))
-    select9 = st.sidebar.selectbox("Độ dày (**mm**)", options=opt9)
+    select9 = st.sidebar.slider("Độ dày (**mm**)", opt9[0], opt9[-1])
     resulf['Thick'] = select9
 
     # 10: Cores_CPU
@@ -90,18 +90,18 @@ def Run():
 
     # 12: Speed_CPU
     opt12 = np.sort(select_items('Speed_CPU'))
-    select12 = st.sidebar.selectbox("Tốc độ xử lý của CPU", options=opt12)
+    select12 = st.sidebar.select_slider("Tốc độ xử lý của CPU (**GHz**)", options=opt12)
     resulf['Speed_CPU'] = select12
 
     # 13: MaxSpeed_CPU
     opt13 = np.sort(select_items('MaxSpeed_CPU'))
-    select13 = st.sidebar.selectbox("Tốc độ xử lý TỐI ĐA của CPU (**GHz**)", options=opt13)
+    select13 = st.sidebar.select_slider("Tốc độ xử lý TỐI ĐA của CPU", options=opt13)
     resulf['MaxSpeed_CPU'] = select13
 
     # 14: Key_Light
     opt14 = select_items('Key_Light')
     select14 = st.sidebar.selectbox("Đèn bàn phím", options=opt14)
-    resulf['Key_light'] = select14
+    resulf['Key_Light'] = select14
 
     # 15: Cache
     opt15 = np.sort(select_int_value(select_items('Cache')))
@@ -114,9 +114,6 @@ def Run():
     resulf['BusSpeed_RAM'] = select16
 
     # 17: MaxSup_RAM
-    #opt17 = np.sort(select_int_value(select_items('MaxSup_RAM')))
-    #select17 = st.sidebar.selectbox("Hỗ trợ RAM tối đa (**GB**)", options=opt17)
-    #resulf['MaxSup_Ram'] = select17
     opt17 = np.sort(select_int_value(select_items('MaxSup_RAM')))
 
     opt17_1 = [str(item) for item in opt17]
@@ -128,11 +125,10 @@ def Run():
         resulf['MaxSup_Ram'] = 0
     else:
         resulf['MaxSup_Ram'] = int(select17)
-    
 
     # 18: Screen_Size
     opt18 = np.sort((select_items('Screen_Size')))
-    select18 = st.sidebar.selectbox("Kích cỡ màn hình (**Inch**)", options=opt18)
+    select18 = st.sidebar.slider("Kích cỡ màn hình (**Inch**)", opt18[0], opt18[-1], format="%.1f")
     resulf['Screen_Size'] = select18
 
     # 19: Refresh_Rate
@@ -142,7 +138,7 @@ def Run():
 
     # 20: Weight
     opt20 = np.sort((select_items('Weight')))
-    select20 = st.sidebar.selectbox("Khối lượng của máy (**Kg**)", options=opt20)
+    select20 = st.sidebar.slider("Khối lượng của máy (**Kg**)", opt20[0], opt20[-1])
     resulf['Weight'] = select20
 
     # 21: Charging_Power
