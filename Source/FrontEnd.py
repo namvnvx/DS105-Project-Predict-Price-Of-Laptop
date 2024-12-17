@@ -96,7 +96,7 @@ def Run():
     resulf['MaxSpeed_CPU'] = select13
 
     # 14: Key_Light
-    opt14 = np.sort(select_items('Key_Light'))
+    opt14 = select_items('Key_Light')
     select14 = st.sidebar.selectbox("Đèn bàn phím", options=opt14)
     resulf['Key_light'] = select14
 
@@ -122,9 +122,9 @@ def Run():
     select17 = st.sidebar.selectbox("Hỗ trợ RAM tối đa (**GB**)", options=opt17_1)
 
     if select17 == 'Không hỗ trợ':
-        resulf['MaxSup_RAM'] = 0
+        resulf['MaxSup_Ram'] = 0
     else:
-        resulf['MaxSup_RAM'] = int(select17)
+        resulf['MaxSup_Ram'] = int(select17)
     
 
     # 18: Screen_Size
@@ -166,9 +166,9 @@ def Run():
     st.subheader("Kết quả lựa chọn")
     
     data = pd.Series(resulf)
-    p1 = data[:8].to_frame().rename(columns={0: "Giá trị đã chọn"}) 
-    p2 = data[8:15].to_frame().rename(columns={0: "Giá trị đã chọn"})
-    p3 = data[15:].to_frame().rename(columns={0: "Giá trị đã chọn"})
+    p1 = data.iloc[:8].to_frame().rename(columns={0: "Giá trị đã chọn"}) 
+    p2 = data.iloc[8:15].to_frame().rename(columns={0: "Giá trị đã chọn"})
+    p3 = data.iloc[15:].to_frame().rename(columns={0: "Giá trị đã chọn"})
 
     # Tạo 3 cột trong Streamlit
     col1, col2, col3 = st.columns(3)
@@ -189,12 +189,10 @@ def Input():
 
     return Run()
 
-
-
 #================ Output ================#
 def Output(result):
     # Hàm xuất kết quả
-    print(result)
-    st.header('Kết quả dự đoán : ' + str(result))
 
-    return
+    st.header('Kết quả dự đoán : ' + result + ' TrVND')
+
+    return 0
