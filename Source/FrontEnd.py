@@ -169,9 +169,9 @@ def Run():
     st.subheader("Kết quả lựa chọn")
     
     data = pd.Series(resulf)
-    p1 = data[:8].to_frame().rename(columns={0: "Giá trị đã chọn"}) 
-    p2 = data[8:15].to_frame().rename(columns={0: "Giá trị đã chọn"})
-    p3 = data[15:].to_frame().rename(columns={0: "Giá trị đã chọn"})
+    p1 = data.iloc[:8].to_frame().rename(columns={0: "Giá trị đã chọn"}) 
+    p2 = data.iloc[8:15].to_frame().rename(columns={0: "Giá trị đã chọn"})
+    p3 = data.iloc[15:].to_frame().rename(columns={0: "Giá trị đã chọn"})
 
     # Tạo 3 cột trong Streamlit
     col1, col2, col3 = st.columns(3)
@@ -192,12 +192,10 @@ def Input():
 
     return Run()
 
-
-
 #================ Output ================#
 def Output(result):
     # Hàm xuất kết quả
-    print(result)
-    st.header('Kết quả dự đoán : ' + str(result))
 
-    return
+    st.header('Kết quả dự đoán : ' + result + ' TrVND')
+
+    return 0

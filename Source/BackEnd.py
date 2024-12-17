@@ -38,8 +38,9 @@ def ProcessResult(data):
     # Trả về giá trị được làm đẹp
 
     temp = data[0] / 1000000.
+    temp = str(temp).split('.')
 
-    return temp
+    return temp[0] + ',' + temp[1][0]
 
 def Predict(data):
     # Dự đoán 
