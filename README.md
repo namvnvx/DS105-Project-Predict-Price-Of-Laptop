@@ -1,6 +1,6 @@
 # 💻 Laptop Price Analysis and Prediction on TGDD Retail Website  
 
-## 📊 I. Data Collection  
+## 📊 Data Collection  
 - The dataset was collected from the **Thegioididong** website ([TGDD](https://www.thegioididong.com/laptop)) on **October 24, 2024**.  
 - It includes **laptop prices** from various brands currently available on the market.  
 - The dataset consists of **284 different laptops** and **35 variables**, including:  
